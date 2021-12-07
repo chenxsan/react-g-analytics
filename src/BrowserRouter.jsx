@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Router, BrowserRouter } from 'react-router-dom';
-import createBrowserHistory from 'history/createBrowserHistory';
-import GoogleAnalytics from './GoogleAnalytics';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Router, BrowserRouter } from 'react-router-dom'
+import { createBrowserHistory } from 'history'
+import GoogleAnalytics from './GoogleAnalytics'
 
 export default class GABrowserRouter extends Component {
   static propTypes = {
@@ -11,41 +11,26 @@ export default class GABrowserRouter extends Component {
     children: PropTypes.node,
     id: PropTypes.string.isRequired,
     set: PropTypes.object,
-  };
+  }
 
   static childContextTypes = {
     history: PropTypes.object.isRequired,
-  };
+  }
 
   getChildContext() {
     return {
       history: this.history,
-    };
+    }
   }
 
   componentWillMount() {
-    const {
-      history,
-      basename,
-      forceRefresh,
-      getUserConfirmation,
-      keyLength,
-    } = this.props;
+    const { history, basename, forceRefresh } = this.props
 
-    this.history = history || createBrowserHistory(
-      basename,
-      forceRefresh,
-      getUserConfirmation,
-      keyLength,
-    );
+    this.history = history || createBrowserHistory(basename, forceRefresh)
   }
 
   render() {
-    const {
-      id,
-      set,
-      children,
-    } = this.props;
+    const { id, set, children } = this.props
 
     return (
       <Router history={this.history}>
@@ -53,6 +38,6 @@ export default class GABrowserRouter extends Component {
           {children}
         </GoogleAnalytics>
       </Router>
-    );
+    )
   }
 }
